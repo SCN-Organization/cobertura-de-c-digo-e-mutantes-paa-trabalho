@@ -40,7 +40,7 @@ public class RepositorioContasArquivoBin implements IRepositorioContas {
 			contas = new RepositorioContasArray();
 			arquivoContas = new File(this.ARQUIVO);
 			arquivoContas.createNewFile();
-			if (arquivoContas.length() != 0)
+			if (arquivoContas.length() >= 0)
 				this.lerArquivo();
 		} catch (IOException e) {
 			throw new RepositorioException(e);
