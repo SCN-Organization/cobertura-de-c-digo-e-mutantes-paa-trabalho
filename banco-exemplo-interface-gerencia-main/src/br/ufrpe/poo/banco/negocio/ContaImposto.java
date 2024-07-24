@@ -28,7 +28,7 @@ public class ContaImposto extends ContaAbstrata {
 					this.getSaldo());
 		double imposto = valor * CPMF;
 		double total = valor + imposto;
-		this.setSaldo(this.getSaldo() - total);
+		this.setSaldo(this.getSaldo() - imposto);
 	}
 
 }
