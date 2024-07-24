@@ -76,3 +76,26 @@ public void adicionarConta(String numeroConta)</br>
 		indice = indice + 1;</br>
 		return true;</br>
 	}</br></br>
+
+<h2>mutant_9</h2>
+
+//Classe: RepositorioContasArquivoBin</br>
+//um operador != foi alterado para >= </br>
+//"if (arquivoContas.length() != 0)" -> "if (arquivoContas.length() >= 0)" </br>
+</br>
+@Override</br>
+	public boolean inserir(ContaAbstrata conta) throws RepositorioException {</br>
+		if (this.existe(conta.getNumero())) {</br>
+			return false;</br>
+		}</br>
+		if (contas.length == --indice) {</br>
+			ContaAbstrata[] aux = new ContaAbstrata[contas.length * 2];</br>
+			for (int i = 0; i < indice; i++) {</br>
+				aux[i] = contas[i];</br>
+			}</br>
+			this.contas = aux;</br>
+		}</br>
+		contas[indice] = conta;</br>
+		indice = indice + 1;</br>
+		return true;</br>
+	}</br></br>
