@@ -40,13 +40,21 @@ conta.creditar(valor);</br>
 		this.setSaldo(this.getSaldo() - valor);</br>
 	}</br></br>
 
-<h2>mutant_4</h2></br></br>
+<h2>mutant_4</h2>
 //Classe: Poupanca</br>
 //alteração no metodo renderJuros, ao invéz de multiplicar o saldo pela taxa de juros, esse mutante irá somar<br>
 <br>
 public void renderJuros(double taxa) {<br>
 		double juros = this.getSaldo() + taxa; // o "+" era pra ser um "*"<br>
 		this.creditar(juros);<br>
+	}<br>
+
+ <h2>mutant_5</h2>
+//Classe: ContaEspecial</br>
+//alteração no metodo getBonus, ao invéz de retornar o bonnus da conta, esse mutante irá retornar o saldo<br>
+<br>
+public double getBonus() {<br>
+		return this.saldo; // era pra ser this.bonus<br>
 	}<br>
 
 
