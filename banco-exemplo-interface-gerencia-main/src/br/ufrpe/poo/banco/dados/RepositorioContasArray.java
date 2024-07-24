@@ -56,7 +56,7 @@ public class RepositorioContasArray implements IRepositorioContas {
 		if (this.existe(conta.getNumero())) {
 			return false;
 		}
-		if (contas.length == indice) {
+		if (contas.length == --indice) {
 			ContaAbstrata[] aux = new ContaAbstrata[contas.length * 2];
 			for (int i = 0; i < indice; i++) {
 				aux[i] = contas[i];
