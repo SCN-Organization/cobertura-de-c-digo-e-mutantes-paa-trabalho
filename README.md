@@ -129,3 +129,19 @@ public void adicionarConta(String numeroConta)</br>
 		indice = indice + 1;</br>
 		return true;</br>
 	}</br></br>
+
+<h2>mutant_10</h2>
+
+//Classe: ContaImposto</br>
+//um operador < foi alterado para <=, e logo se o valor da transação for igual ao valor disponível, a exceção de saldo insuficiente será chamada</br>
+//"if (this.getSaldo() < valor)" -> "if (this.getSaldo() <= valor)" </br>
+</br>
+@Override</br>
+	public void debitar(double valor) throws SaldoInsuficienteException {</br>
+		if (this.getSaldo() < valor)</br>
+			throw new SaldoInsuficienteException(this.getNumero(),</br>
+					this.getSaldo());</br>
+		double imposto = valor * CPMF;</br>
+		double total = valor + imposto;</br>
+		this.setSaldo(this.getSaldo() - total);</br>
+	}</br></br>
