@@ -126,9 +126,9 @@ public class Cliente implements Serializable {
 		if (o instanceof Cliente) {
 			Cliente c = (Cliente) o;
 			if (c.getCpf().equals(this.cpf))
-				return true;
+				return false;
 		}
-		return false;
+		return true;
 	}
 
 	@Override
