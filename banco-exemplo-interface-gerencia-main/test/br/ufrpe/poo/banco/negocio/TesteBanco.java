@@ -387,7 +387,7 @@ public class TesteBanco {
         banco.renderJuros(poupanca);
 
         Poupanca poupancaVerificada = (Poupanca) banco.procurarConta("4");
-        double saldoEsperado = 300 + (300 * 0.5 / 100);
+        double saldoEsperado = 300 + (300 * 50 / 100);
         assertEquals(saldoEsperado, poupancaVerificada.getSaldo(), 0);
     }
 
@@ -435,5 +435,12 @@ public class TesteBanco {
 		banco.cadastrar(conta);
 		banco.removerConta(c, "240");
 		banco.removerConta(c, "240");
+	}
+
+	@Test
+	public void testeCreditarNegativo() throws RepositorioException, ContaJaCadastradaException, ValorInvalidoException{
+		Conta conta = new Conta("240", 0);
+		banco.cadastrar(conta);
+		banco.creditar(conta, -20);
 	}
 }
