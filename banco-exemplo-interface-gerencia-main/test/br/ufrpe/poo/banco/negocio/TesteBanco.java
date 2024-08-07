@@ -399,4 +399,41 @@ public class TesteBanco {
         fail("Excecao RenderJurosPoupancaException nao levantada");
     }
 
+	@Test(expected = ClienteJaCadastradoException.class)
+	public void testeCadastroCliente() throws RepositorioException, InicializacaoSistemaException, ClienteJaCadastradoException{
+		Cliente c = new Cliente("Anderson", "12345678900");
+		Banco b = Banco.getInstance();
+		b.cadastrarCliente(c);
+		assertEquals("Cliente não cadastrado","Anderson", b.procurarCliente("12345678900").getNome());
+		b.cadastrarCliente(c);
+	}
+
+	@Test
+	public void testeAssociarConta() throws RepositorioException, ClienteJaCadastradoException, ClienteJaPossuiContaException, ContaJaAssociadaException, ClienteNaoCadastradoException, ContaJaCadastradaException{
+		Cliente c = new Cliente("Anderson", "12345678900");
+		banco.cadastrarCliente(c);
+		banco.associarConta("12345678900", "240");
+	}
+
+	@Test
+	public void testeRemoverCliente() throws RepositorioException, ClienteNaoCadastradoException, ContaNaoEncontradaException, ClienteNaoPossuiContaException, ClienteJaCadastradoException, ContaJaCadastradaException, ClienteJaPossuiContaException, ContaJaAssociadaException{
+		Cliente c = new Cliente("Boris", "12345678901");
+		banco.cadastrarCliente(c);
+		Conta conta = new Conta("240", 0);
+		banco.cadastrar(conta);
+		banco.associarConta("12345678901", "240");
+		banco.removerCliente("12345678901");
+		assertEquals("Cliente não removido", null, banco.procurarCliente("12345678900"));
+	}
+	
+	@Test(expected = ClienteNaoPossuiContaException.class)
+	public void testeRemoverConta() throws RepositorioException, ClienteJaCadastradoException, ClienteJaPossuiContaException, ContaNaoEncontradaException, ClienteNaoPossuiContaException, ContaJaCadastradaException{
+		Cliente c = new Cliente("Boris", "12345678901");
+		banco.cadastrarCliente(c);
+		Conta conta = new Conta("240", 0);
+		c.adicionarConta("240");
+		banco.cadastrar(conta);
+		banco.removerConta(c, "240");
+		banco.removerConta(c, "240");
+	}
 }
