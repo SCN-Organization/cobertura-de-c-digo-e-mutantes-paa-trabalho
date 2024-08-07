@@ -437,10 +437,17 @@ public class TesteBanco {
 		banco.removerConta(c, "240");
 	}
 
-	@Test
+	@Test(expected = ValorInvalidoException.class)
 	public void testeCreditarNegativo() throws RepositorioException, ContaJaCadastradaException, ValorInvalidoException{
 		Conta conta = new Conta("240", 0);
 		banco.cadastrar(conta);
 		banco.creditar(conta, -20);
+	}
+
+	@Test
+	public void testeIndiceAlcancadoRepoArray() throws RepositorioException, ContaJaCadastradaException{
+		for(int i = 0; i < 20; i++){
+			banco.cadastrar((new Conta(String.valueOf(i), 0)));
+		}
 	}
 }
