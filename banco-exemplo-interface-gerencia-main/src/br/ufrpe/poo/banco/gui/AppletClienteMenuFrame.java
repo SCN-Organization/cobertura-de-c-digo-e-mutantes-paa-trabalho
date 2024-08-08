@@ -37,7 +37,7 @@ public class AppletClienteMenuFrame extends JFrame {
 		});
 	}
 
-	public AppletClienteMenuFrame() {
+	public AppletClienteMenuFrame() throws ClassNotFoundException {
 		super();
 		try {
 			banco = Banco.getInstance();
