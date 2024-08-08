@@ -17,7 +17,7 @@ public class TesteConta2 {
 	}
 
 	@Test(expected = SaldoInsuficienteException.class)
-	public final void testDebitarInsuficiente() throws SaldoInsuficienteException {
+	public final void testDebitarInsuficiente() throws SaldoInsuficienteException{
 		Conta c = new Conta("1", 100);
 		c.debitar(101);
 		fail("Exceção de saldo insuficiente não levantada");
@@ -27,5 +27,6 @@ public class TesteConta2 {
 	public final void testCreditar() {
 		fail("Not yet implemented"); // TODO
 	}
+	
 
 }

@@ -15,7 +15,7 @@ public class TesteConta {
 	 */
 	@Test
 	public void testeConstrutor() {
-
+		
 		Conta c = new Conta("1", 100);
 		assertEquals("Numero incorreto", "1", c.getNumero());
 		assertEquals("Saldo incorreto", 100, c.getSaldo(), 0);
@@ -26,7 +26,7 @@ public class TesteConta {
 	 */
 	@Test
 	public void testeConstrutorSaldoNegativo() {
-
+		
 		Conta c = new Conta("1", -786);
 		assertEquals(0, c.getSaldo(), 0);
 	}
@@ -36,7 +36,7 @@ public class TesteConta {
 	 */
 	@Test
 	public void testeDebitarSaldoSuficiente() {
-
+		
 		Conta c = new Conta("123", 300);
 		try {
 			c.debitar(200);
@@ -54,7 +54,7 @@ public class TesteConta {
 	@Test(expected = SaldoInsuficienteException.class)
 	public void testeDebitarSaldoInsuficiente()
 			throws SaldoInsuficienteException {
-
+		
 		Conta c = new Conta("123", 300);
 		c.debitar(301);
 	}
@@ -65,7 +65,7 @@ public class TesteConta {
 	 */
 	@Test
 	public void testeDebitarSaldoInsuficienteNaoMudaSaldo() {
-
+		
 		Conta c = new Conta("2132", 42342);
 		boolean excecao = false;
 		try {
@@ -83,7 +83,7 @@ public class TesteConta {
 	 */
 	@Test
 	public void testeCreditarValorNegativoNaoMudaSaldo() {
-
+		
 		Conta c = new Conta("6564", 2000);
 		c.creditar(-1000);
 		assertEquals("Credita nao deveria alterar o saldo", 2000, c.getSaldo(),
@@ -95,7 +95,7 @@ public class TesteConta {
 	 */
 	@Test
 	public void testeCreditarSaldoSuficiente() {
-
+		
 		Conta c = new Conta("6564", 2000);
 		c.creditar(1000);
 		assertEquals(3000, c.getSaldo(), 0);
@@ -105,23 +105,24 @@ public class TesteConta {
 	 * Testa o metodo equals de conta quando duas contas tem o mesmo numero e
 	 * saldos diferentes
 	 */
-
+	
 	@Test
 	public void testeEquals() {
-
+		
 		Conta c1 = new Conta("456", 50);
 		Conta c2 = new Conta("456", 3423);
 		assertEquals(c1, c2);
 	}
-
+	
 	@Test
 	public void testeEquals2() {
-
+		
 		Conta c1 = new Conta("456", 50);
-		c1.setNumero("457");
-		String s1 = "457";
+		String s1 = "456";
 		assertFalse(c1.equals(s1));
-
+		
 	}
+
+
 
 }

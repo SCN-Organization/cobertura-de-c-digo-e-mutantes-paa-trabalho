@@ -57,8 +57,9 @@ public class Banco implements IGerencia, ICliente {
 	 *             Lancada quando ocorre erro no repositorio.
 	 * @throws InicializacaoSistemaException
 	 *             Lancada quando ocorre erro no repositorio.
+	 * @throws ClassNotFoundException 
 	 */
-	public static Banco getInstance() throws RepositorioException, InicializacaoSistemaException {
+	public static Banco getInstance() throws RepositorioException, InicializacaoSistemaException, ClassNotFoundException {
 
 		if (Banco.instance == null) {
 			try {

@@ -37,7 +37,7 @@ public class TesteBanco {
 
 	@Before
 	public void apagarArquivos() throws IOException, RepositorioException,
-			InicializacaoSistemaException {
+			InicializacaoSistemaException, ClassNotFoundException {
 
 		BufferedWriter bw = new BufferedWriter(new FileWriter("clientes.dat"));
 		bw.close();
@@ -50,12 +50,13 @@ public class TesteBanco {
 
 	/**
 	 * Verifica o cadastramento de uma nova conta.
+	 * @throws ClassNotFoundException 
 	 * 
 	 */
 	@Test
 	public void testeCadastarNovaConta() throws RepositorioException,
 			ContaJaCadastradaException, ContaNaoEncontradaException,
-			InicializacaoSistemaException {
+			InicializacaoSistemaException, ClassNotFoundException {
 
 		Banco banco = new Banco(null, new RepositorioContasArquivoBin());
 		ContaAbstrata conta1 = new Conta("1", 100);
@@ -420,7 +421,7 @@ public class TesteBanco {
     }
 
 	@Test(expected = ClienteJaCadastradoException.class)
-	public void testeCadastroCliente() throws RepositorioException, InicializacaoSistemaException, ClienteJaCadastradoException{
+	public void testeCadastroCliente() throws RepositorioException, InicializacaoSistemaException, ClienteJaCadastradoException, ClassNotFoundException{
 		Cliente c = new Cliente("Anderson", "12345678900");
 		Banco b = Banco.getInstance();
 		b.cadastrarCliente(c);
@@ -479,7 +480,7 @@ public class TesteBanco {
 	}
 
 	@Test
-	public void testeLerArquivo() throws RepositorioException, ContaJaCadastradaException{
+	public void testeLerArquivo() throws RepositorioException, ContaJaCadastradaException, ClassNotFoundException{
 		for(int i = 0; i < 20; i++){
 			banco.cadastrar((new Conta(String.valueOf(i), 0)));
 		}
@@ -487,19 +488,19 @@ public class TesteBanco {
 	}
 	
 	@Test
-	public void testeGetIterator() throws RepositorioException, ContaJaCadastradaException{
+	public void testeGetIterator() throws RepositorioException, ContaJaCadastradaException, ClassNotFoundException{
 		RepositorioContasArquivoBin repo = new RepositorioContasArquivoBin();
 		repo.getIterator();
 	}
 	
 	@Test
-	public void testeRemoverContaInexistente() throws RepositorioException {
+	public void testeRemoverContaInexistente() throws RepositorioException, ClassNotFoundException {
 		RepositorioContasArquivoBin repo = new RepositorioContasArquivoBin();
 		repo.remover("69420");
 	}
 	
 	@Test
-	public void testeAtaulizarContaInexistente() throws RepositorioException {
+	public void testeAtaulizarContaInexistente() throws RepositorioException, ClassNotFoundException {
 		RepositorioContasArquivoBin repo = new RepositorioContasArquivoBin();
 		ContaAbstrata conta = new Conta("123",0);
 		repo.atualizar(conta);

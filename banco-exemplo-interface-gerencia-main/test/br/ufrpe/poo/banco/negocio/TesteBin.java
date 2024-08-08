@@ -22,7 +22,7 @@ public class TesteBin {
     private RepositorioContasArquivoBin repositorio;
 
     @BeforeEach
-    public void setUp() throws RepositorioException {
+    public void setUp() throws RepositorioException, ClassNotFoundException {
         repositorio = new RepositorioContasArquivoBin();
     }
 
