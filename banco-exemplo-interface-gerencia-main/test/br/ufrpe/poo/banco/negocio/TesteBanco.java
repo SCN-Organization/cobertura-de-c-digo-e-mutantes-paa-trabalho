@@ -6,6 +6,8 @@ import static org.junit.Assert.fail;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -13,6 +15,7 @@ import org.junit.Test;
 
 import br.ufrpe.poo.banco.dados.IRepositorioContas;
 import br.ufrpe.poo.banco.dados.RepositorioContasArquivoBin;
+import br.ufrpe.poo.banco.dados.RepositorioContasArray;
 import br.ufrpe.poo.banco.exceptions.AtualizacaoNaoRealizadaException;
 import br.ufrpe.poo.banco.exceptions.ClienteJaCadastradoException;
 import br.ufrpe.poo.banco.exceptions.ClienteJaPossuiContaException;
@@ -62,6 +65,22 @@ public class TesteBanco {
 		assertEquals(conta1.getSaldo(), conta2.getSaldo(), 0);
 	}
 
+	@Test
+	public void testeEstourarLimiteDeContasArray() throws RepositorioException,
+			ContaJaCadastradaException, ContaNaoEncontradaException,
+			InicializacaoSistemaException {
+
+		Banco banco = new Banco(null, new RepositorioContasArray());
+		
+		List<ContaAbstrata> contas = new ArrayList<ContaAbstrata>();
+		for(int i = 0;i < 100;i++) {
+			contas.add(new Conta(String.valueOf(i),0));
+			banco.cadastrar(contas.get(i));
+		}
+		ContaAbstrata conta = new Conta("100",0);
+		banco.cadastrar(conta);
+	}
+	
 	/**
 	 * Verifica que nao e permitido cadastrar duas contas com o mesmo numero.
 	 * 
@@ -437,6 +456,13 @@ public class TesteBanco {
 		banco.removerConta(c, "240");
 		banco.removerConta(c, "240");
 	}
+	
+	@Test(expected = ClienteNaoCadastradoException.class)
+	public void testeRemoverClienteSemConta() throws RepositorioException, ClienteJaCadastradoException, ClienteNaoCadastradoException, ContaNaoEncontradaException, ClienteNaoPossuiContaException {
+		Cliente c = new Cliente("Kamina", "101010");
+		banco.cadastrarCliente(c);
+		banco.removerCliente("101010");
+	}
 
 	@Test(expected = ValorInvalidoException.class)
 	public void testeCreditarNegativo() throws RepositorioException, ContaJaCadastradaException, ValorInvalidoException{
@@ -458,5 +484,24 @@ public class TesteBanco {
 			banco.cadastrar((new Conta(String.valueOf(i), 0)));
 		}
 		RepositorioContasArquivoBin repo = new RepositorioContasArquivoBin();
+	}
+	
+	@Test
+	public void testeGetIterator() throws RepositorioException, ContaJaCadastradaException{
+		RepositorioContasArquivoBin repo = new RepositorioContasArquivoBin();
+		repo.getIterator();
+	}
+	
+	@Test
+	public void testeRemoverContaInexistente() throws RepositorioException {
+		RepositorioContasArquivoBin repo = new RepositorioContasArquivoBin();
+		repo.remover("69420");
+	}
+	
+	@Test
+	public void testeAtaulizarContaInexistente() throws RepositorioException {
+		RepositorioContasArquivoBin repo = new RepositorioContasArquivoBin();
+		ContaAbstrata conta = new Conta("123",0);
+		repo.atualizar(conta);
 	}
 }
