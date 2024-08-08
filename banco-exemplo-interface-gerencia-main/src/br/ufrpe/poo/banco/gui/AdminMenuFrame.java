@@ -56,7 +56,7 @@ public class AdminMenuFrame extends JFrame {
 		});
 	}
 
-	public AdminMenuFrame() {
+	public AdminMenuFrame() throws ClassNotFoundException {
 		super();
 		try {
 			AdminMenuFrame.banco = Banco.getInstance();

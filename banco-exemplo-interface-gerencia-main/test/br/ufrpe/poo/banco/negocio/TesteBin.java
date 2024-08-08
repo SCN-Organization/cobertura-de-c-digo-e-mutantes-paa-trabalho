@@ -2,31 +2,27 @@ package br.ufrpe.poo.banco.negocio;
 
 import br.ufrpe.poo.banco.dados.RepositorioContasArquivoBin;
 import br.ufrpe.poo.banco.exceptions.RepositorioException;
-import br.ufrpe.poo.banco.negocio.ContaAbstrata;
-import br.ufrpe.poo.banco.negocio.Conta;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 public class TesteBin {
 
     private RepositorioContasArquivoBin repositorio;
 
-    @BeforeEach
+    @Before
     public void setUp() throws RepositorioException, ClassNotFoundException {
         repositorio = new RepositorioContasArquivoBin();
     }
 
-    @AfterEach
+    @After
     public void tearDown() {
         File file = new File("contas.dat");
         if (file.exists()) {
