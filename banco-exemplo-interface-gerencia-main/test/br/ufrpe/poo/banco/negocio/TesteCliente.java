@@ -177,6 +177,23 @@ public class TesteCliente {
 	}
 
 	@Test
+	public void testEqualsFalse(){
+		Cliente c1 = new Cliente("Nome Teste", "12345678900");
+		Cliente c2 = new Cliente("Nome Teste", "12345678911");
+		assertFalse(c1.equals(c2));
+		assertFalse(c2.equals(c1));
+	}
+
+	@Test
+	public void testEqualsNotInstanceof(){
+		Cliente c1 = new Cliente("Nome Teste", "12345678900");
+		Integer a = 20;
+		assertFalse(c1.equals(a));
+		assertFalse(a.equals(c1));
+	}
+
+
+	@Test
 	public void testToString() {
 		Cliente c1 = new Cliente("Nome Teste", "12345678900");
 		String expectedString = "Nome: Nome Teste\nCPF: 12345678900\nContas: []";
