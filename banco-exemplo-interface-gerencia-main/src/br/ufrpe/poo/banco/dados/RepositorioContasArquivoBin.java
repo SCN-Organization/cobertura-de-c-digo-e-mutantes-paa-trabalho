@@ -34,8 +34,9 @@ public class RepositorioContasArquivoBin implements IRepositorioContas {
 	 * 
 	 * @throws RepositorioException
 	 *             Lancada quando ocorre erro no repositorio.
+	 * @throws ClassNotFoundException 
 	 */
-	public RepositorioContasArquivoBin() throws RepositorioException {
+	public RepositorioContasArquivoBin() throws RepositorioException, ClassNotFoundException {
 		try {
 			contas = new RepositorioContasArray();
 			arquivoContas = new File(this.ARQUIVO);
@@ -52,11 +53,12 @@ public class RepositorioContasArquivoBin implements IRepositorioContas {
 	 * 
 	 * @throws RepositorioException
 	 *             lancada em caso de erro na leitura do arquivo.
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
 	 */
-	private void lerArquivo() throws RepositorioException {
+	private void lerArquivo() throws RepositorioException, IOException, ClassNotFoundException {
 		FileInputStream fisBanco = null;
 		ObjectInputStream oisBanco = null;
-		try {
 			fisBanco = new FileInputStream(this.arquivoContas);
 			oisBanco = new ObjectInputStream(fisBanco);
 			while (true) {
@@ -67,20 +69,8 @@ public class RepositorioContasArquivoBin implements IRepositorioContas {
 					break;
 				}
 			}
-		} catch (FileNotFoundException e) {
-			throw new RepositorioException(e);
-		} catch (IOException e) {
-			throw new RepositorioException(e);
-		} catch (ClassNotFoundException e) {
-			throw new RepositorioException(e);
-		} finally {
-			try {
-				oisBanco.close();
-				fisBanco.close();
-			} catch (IOException e) {
-				throw new RepositorioException(e);
-			}
-		}
+			oisBanco.close();
+			fisBanco.close();
 	}
 
 	/**
@@ -100,8 +90,6 @@ public class RepositorioContasArquivoBin implements IRepositorioContas {
 				ContaAbstrata c = it.next();
 				oosBanco.writeObject(c);
 			}
-		} catch (FileNotFoundException e) {
-			throw new RepositorioException(e);
 		} catch (IOException e) {
 			throw new RepositorioException(e);
 		} finally {
