@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import br.ufrpe.poo.banco.dados.IRepositorioContas;
 import br.ufrpe.poo.banco.dados.RepositorioContasArquivoBin;
 import br.ufrpe.poo.banco.exceptions.AtualizacaoNaoRealizadaException;
 import br.ufrpe.poo.banco.exceptions.ClienteJaCadastradoException;
@@ -449,5 +450,13 @@ public class TesteBanco {
 		for(int i = 0; i < 20; i++){
 			banco.cadastrar((new Conta(String.valueOf(i), 0)));
 		}
+	}
+
+	@Test
+	public void testeLerArquivo() throws RepositorioException, ContaJaCadastradaException{
+		for(int i = 0; i < 20; i++){
+			banco.cadastrar((new Conta(String.valueOf(i), 0)));
+		}
+		RepositorioContasArquivoBin repo = new RepositorioContasArquivoBin();
 	}
 }
