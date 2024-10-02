@@ -4,7 +4,10 @@
 <li>Tom Jones</li>
 
 
-![Screenshot_1](https://github.com/user-attachments/assets/c26e49b2-dc50-4589-a2b4-02935960fa4d)
+![WhatsApp Image 2024-10-02 at 11 09 05_812a63d1](https://github.com/user-attachments/assets/245b59b1-d7e2-4a99-99e1-0b217549ab8e)
+![WhatsApp Image 2024-10-02 at 11 08 00_b0eae2ef](https://github.com/user-attachments/assets/743da26f-57d7-4486-bb6e-0ea53144dc14)
+![WhatsApp Image 2024-10-02 at 11 10 33_5225b6ed](https://github.com/user-attachments/assets/be846b43-9328-4ed4-a114-cccb7ff35fb4)
+
 
 
 
